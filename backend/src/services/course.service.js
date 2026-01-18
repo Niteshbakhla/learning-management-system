@@ -1,4 +1,5 @@
 import Course from "../models/course.model.js";
+import CustomError from "../utils/customError.js";
 
 export const createCourseService = async (data) => {
     return await Course.create(data);
@@ -12,7 +13,7 @@ export const updateCourseService = async (courseId, instructorId, data) => {
       );    
 
       if (!course) {
-        throw new Error("Course not found or unauthorized");
+        throw new CustomError("Course not found or unauthorized",404);
       }
     
       return course;
@@ -25,7 +26,7 @@ export const publishCourseService = async (courseId, instructorId, publish) => {
     });
 
     if (!course) {
-        throw new Error("Course not found or unauthorized");
+        throw new CustomError("Course not found or unauthorized",404);
     }
 
     course.isPublished = publish;
