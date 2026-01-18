@@ -13,6 +13,11 @@ const enrollmentSchema = new mongoose.Schema(
       ref: "Course",
       required: true,
     },
+
+    enrollmentAt: {
+      type: Date,
+      default: Date.now
+    }
   },
   { timestamps: true }
 );

@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.use("/", indexRoutes)
+app.use("/api", indexRoutes)
 
 // Global error handler (must be last)
 app.use(errorHandler);

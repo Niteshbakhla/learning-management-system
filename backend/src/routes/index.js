@@ -2,11 +2,13 @@ import { Router } from "express";
 import authRoutes from "./user.router.js";
 import courseRoutes from "./course.routes.js";
 import lessonRoutes from "./lesson.routes.js";
+import enrollmentRoutes from "./enrollment.routes.js"
 
 const router = Router();
 
-router.use("/api/auth", authRoutes);
-router.use("/api/courses", courseRoutes);
-router.use("/api/lessons", lessonRoutes);
+router.use("/auth", authRoutes);
+router.use("/courses", courseRoutes);
+router.use("/lessons", lessonRoutes);
+router.use("/enrollment",enrollmentRoutes);
 
 export default router; 
