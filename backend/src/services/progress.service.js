@@ -27,8 +27,8 @@ export const getProgressService = async ({ userId, courseId }) => {
 
     const completedCount = progress?.completedLessons?.length || 0;
 
-    const percent =
-        totalLessons === 0 ? 0 : Math.round((completedCount / totalLessons) * 100);
+    const percent = 
+    totalLessons === 0 ? 0 : Math.round((completedCount / totalLessons) * 100);
 
     return {
         totalLessons,
@@ -53,7 +53,6 @@ export const markLessonCompleteService = async ({ userId, courseId, lessonId }) 
         throw new CustomError("Not enrolled in this course", 403)
     }
 
-    // lesson must belong to course
     const lesson = await Lesson.findOne({ _id: lessonId, course: courseId })
     if (!lesson) {
         throw new CustomError("Lesson not found in this course", 404)
