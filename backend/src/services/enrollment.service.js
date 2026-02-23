@@ -44,3 +44,32 @@ export const myEnrollServices = async (userId) => {
     }).populate("course");
 
 }
+
+
+export const enrollmentPerCourseServices = async () => {
+    const data = await Enrollment.aggregate([
+        {
+            $group: {
+                _id: "$course",
+                totalEnrollments: { $sum: 1 },
+            },
+        },
+        {
+            $lookup: {
+                from: "courses",
+                localField: "_id",
+                foreignField: "_id",
+                as: "course",
+            },
+        },
+        { $unwind: "$course" },
+        {
+            $project: {
+                courseTitle: "$course.title",
+                totalEnrollments: 1,
+            },
+        },
+    ]);
+
+    return data;
+}

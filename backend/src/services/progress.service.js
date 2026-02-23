@@ -12,7 +12,6 @@ export const getProgressService = async ({ userId, courseId }) => {
         course: courseId,
     });
 
-
     if (!enrolled) {
         throw new CustomError("Not enrolled in this course", 403);
     }

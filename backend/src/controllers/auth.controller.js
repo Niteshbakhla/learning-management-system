@@ -1,4 +1,7 @@
 export const verifyAuth = (req, res) => {
+
+    res.cookie("token", )
+
     res.status(200).json({
         id: req.dbUser._id,
         uid: req.dbUser.uid,
