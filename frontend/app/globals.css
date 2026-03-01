@@ -1,0 +1,290 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   LMS DESIGN SYSTEM — globals.css
+   Theme: Blue · Modern & Bold · Light + Dark
+   
+   COLOR SYSTEM: oklch(Lightness Chroma Hue)
+   - Lightness : 0 = black,  1 = white
+   - Chroma    : 0 = gray,   0.3 = very vivid
+   - Hue       : 240 = blue, 264 = indigo, 200 = cyan
+   ============================================================ */
+
+:root {
+  /* --------------------------------------------------
+     BACKGROUND
+     Very slightly blue-tinted white (not pure white).
+     Pure white feels flat — this gives the page
+     a subtle cool tone that pairs well with blue.
+  -------------------------------------------------- */
+  --background: oklch(0.98 0.004 240);
+
+  /* --------------------------------------------------
+     FOREGROUND (main text)
+     Near-black with a tiny blue tint.
+     Feels crisper than a neutral gray-black.
+  -------------------------------------------------- */
+  --foreground: oklch(0.13 0.02 240);
+
+  /* --------------------------------------------------
+     PRIMARY — your brand blue
+     oklch(0.52 0.24 240) = strong, confident blue
+     L=0.52 keeps it readable on white
+     C=0.24 makes it vivid and bold
+     H=240 is pure blue (not purple, not cyan)
+  -------------------------------------------------- */
+  --primary: oklch(0.52 0.24 240);
+
+  /* Text on top of primary bg (e.g. button text)
+     Pure near-white so it pops on the blue */
+  --primary-foreground: oklch(0.99 0 0);
+
+  /* --------------------------------------------------
+     CARD / SURFACE
+     Pure white cards on the slightly tinted background
+     creates a clean layered look (depth without shadows)
+  -------------------------------------------------- */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.13 0.02 240);
+
+  /* --------------------------------------------------
+     POPOVER (dropdowns, tooltips)
+     Same as card — consistent floating surface
+  -------------------------------------------------- */
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.13 0.02 240);
+
+  /* --------------------------------------------------
+     SECONDARY — used for secondary buttons, tags
+     Light blue-gray, subtle but still in the blue family
+  -------------------------------------------------- */
+  --secondary: oklch(0.93 0.02 240);
+  --secondary-foreground: oklch(0.25 0.04 240);
+
+  /* --------------------------------------------------
+     MUTED — backgrounds for inactive/subtle areas
+     e.g. table rows, disabled states, code blocks
+  -------------------------------------------------- */
+  --muted: oklch(0.95 0.01 240);
+  --muted-foreground: oklch(0.50 0.02 240);
+  /* placeholder text, captions */
+
+  /* --------------------------------------------------
+     ACCENT — hover highlights, selected items
+     Slightly more saturated than muted, used on
+     sidebar hover states and active nav items
+  -------------------------------------------------- */
+  --accent: oklch(0.91 0.04 240);
+  --accent-foreground: oklch(0.25 0.06 240);
+
+  /* --------------------------------------------------
+     DESTRUCTIVE — errors, delete actions
+     A clear red that stands out from the blue theme
+  -------------------------------------------------- */
+  --destructive: oklch(0.58 0.22 25);
+
+  /* --------------------------------------------------
+     BORDER & INPUT
+     Soft blue-gray borders — visible but not distracting
+     Inputs use same value so forms feel consistent
+  -------------------------------------------------- */
+  --border: oklch(0.88 0.02 240);
+  --input: oklch(0.88 0.02 240);
+
+  /* --------------------------------------------------
+     RING — focus outline (accessibility)
+     Matches primary so focused inputs/buttons
+     show a clean blue glow
+  -------------------------------------------------- */
+  --ring: oklch(0.52 0.24 240);
+
+  /* --------------------------------------------------
+     BORDER RADIUS
+     0.625rem = 10px — modern, rounded but not "bubbly"
+     All components scale from this one value:
+     sm=6px, md=8px, lg=10px, xl=14px
+  -------------------------------------------------- */
+  --radius: 0.625rem;
+
+  /* --------------------------------------------------
+     CHART COLORS — for analytics/progress charts
+     Bold, distinct, all blue-family adjacent
+  -------------------------------------------------- */
+  --chart-1: oklch(0.52 0.24 240);
+  /* primary blue */
+  --chart-2: oklch(0.62 0.18 200);
+  /* cyan */
+  --chart-3: oklch(0.58 0.20 264);
+  /* indigo */
+  --chart-4: oklch(0.70 0.18 160);
+  /* teal-green */
+  --chart-5: oklch(0.65 0.22 280);
+  /* violet */
+
+  /* --------------------------------------------------
+     SIDEBAR — separate token set for the sidebar
+     Slightly darker than background so it feels like
+     a distinct navigation zone (not just another card)
+  -------------------------------------------------- */
+  --sidebar: oklch(0.96 0.01 240);
+  --sidebar-foreground: oklch(0.13 0.02 240);
+  --sidebar-primary: oklch(0.52 0.24 240);
+  /* active item bg */
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  /* active item text */
+  --sidebar-accent: oklch(0.91 0.04 240);
+  /* hover state */
+  --sidebar-accent-foreground: oklch(0.25 0.06 240);
+  --sidebar-border: oklch(0.88 0.02 240);
+  --sidebar-ring: oklch(0.52 0.24 240);
+}
+
+/* ============================================================
+   DARK MODE
+   Strategy: deep navy background (not pure black)
+   Pure black feels harsh — deep navy keeps the blue
+   identity alive in dark mode.
+   ============================================================ */
+.dark {
+  /* --------------------------------------------------
+     Deep navy background — feels premium, not just "dark"
+     L=0.14 is dark enough, the blue tint (H=240) keeps
+     brand identity in dark mode
+  -------------------------------------------------- */
+  --background: oklch(0.14 0.02 240);
+  --foreground: oklch(0.95 0.005 240);
+
+  /* --------------------------------------------------
+     CARD — slightly lighter than background
+     This layering (bg → card → popover) creates depth
+     without needing heavy shadows
+  -------------------------------------------------- */
+  --card: oklch(0.19 0.025 240);
+  --card-foreground: oklch(0.95 0.005 240);
+
+  --popover: oklch(0.19 0.025 240);
+  --popover-foreground: oklch(0.95 0.005 240);
+
+  /* --------------------------------------------------
+     PRIMARY in dark mode — slightly lighter blue
+     The light mode blue (0.52) would look dull on dark bg
+     Bumping to 0.62 keeps it vibrant and readable
+  -------------------------------------------------- */
+  --primary: oklch(0.62 0.24 240);
+  --primary-foreground: oklch(0.99 0 0);
+
+  --secondary: oklch(0.25 0.03 240);
+  --secondary-foreground: oklch(0.90 0.01 240);
+
+  --muted: oklch(0.22 0.02 240);
+  --muted-foreground: oklch(0.60 0.02 240);
+
+  --accent: oklch(0.26 0.05 240);
+  --accent-foreground: oklch(0.90 0.01 240);
+
+  /* Slightly brighter red for dark bg readability */
+  --destructive: oklch(0.65 0.22 25);
+
+  /* Subtle borders — not too strong on dark bg */
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.62 0.24 240);
+
+  /* --------------------------------------------------
+     CHART COLORS — slightly brighter for dark bg
+  -------------------------------------------------- */
+  --chart-1: oklch(0.62 0.24 240);
+  --chart-2: oklch(0.70 0.18 200);
+  --chart-3: oklch(0.65 0.20 264);
+  --chart-4: oklch(0.72 0.16 160);
+  --chart-5: oklch(0.68 0.22 280);
+
+  /* --------------------------------------------------
+     SIDEBAR in dark — same as card, distinct from bg
+  -------------------------------------------------- */
+  --sidebar: oklch(0.19 0.025 240);
+  --sidebar-foreground: oklch(0.95 0.005 240);
+  --sidebar-primary: oklch(0.62 0.24 240);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.26 0.05 240);
+  --sidebar-accent-foreground: oklch(0.90 0.01 240);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.62 0.24 240);
+}
+
+/* ============================================================
+   THEME BRIDGE
+   Maps CSS variables → Tailwind color utilities.
+   This is what makes bg-primary, text-muted-foreground
+   etc. work automatically in your components.
+   ============================================================ */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  /* 6px */
+  --radius-md: calc(var(--radius) - 2px);
+  /* 8px */
+  --radius-lg: var(--radius);
+  /* 10px */
+  --radius-xl: calc(var(--radius) + 4px);
+  /* 14px */
+  --radius-2xl: calc(var(--radius) + 8px);
+  /* 18px */
+  --radius-3xl: calc(var(--radius) + 12px);
+  /* 22px */
+  --radius-4xl: calc(var(--radius) + 16px);
+  /* 26px */
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* ============================================================
+   BASE STYLES
+   Applied globally to every element.
+   border-border  → all borders use your --border color
+   outline-ring   → all focus outlines use --ring (your blue)
+   bg-background  → page background
+   text-foreground → default text color
+   ============================================================ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
