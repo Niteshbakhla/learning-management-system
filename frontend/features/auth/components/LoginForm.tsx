@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,6 +10,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useLogin } from "../hooks/useLogin";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/providers/AuthProvider";
 
 // ── Validation ─────────────────────────────────────────────
 const loginSchema = z.object({
@@ -29,6 +32,21 @@ type LoginSchema = z.infer<typeof loginSchema>;
 export function LoginForm() {
             const [showPassword, setShowPassword] = useState(false);
             const [errorMessage, setErrorMessage] = useState<string | null>(null);
+            const { user, isLoading } = useAuth();
+
+            const { mutateAsync, isPending } = useLogin();
+            const router = useRouter();
+
+
+            useEffect(() => {
+                        if (isLoading) return;       // wait for auth to initialize
+                        if (!user) return;           // not logged in yet
+
+                        // user is now populated — redirect based on role
+                        if (user.role === "admin") router.push("/admin");
+                        else if (user.role === "instructor") router.push("/instructor");
+                        else router.push("/dashboard");
+            }, [user, isLoading]);
 
             const {
                         register,
@@ -38,10 +56,15 @@ export function LoginForm() {
                         resolver: zodResolver(loginSchema),
             });
 
+
             const onSubmit = async (values: LoginSchema) => {
-                        setErrorMessage(null);
-                        console.log(values);
-                        // ← useLogin hook goes here in Chunk 5
+
+                        try {
+                                    await mutateAsync(values)
+
+                        } catch (error) {
+                                    setErrorMessage("Login failed");
+                        }
             };
 
             return (

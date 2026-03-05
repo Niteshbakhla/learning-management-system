@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useRegister } from "../hooks/useRegister";
 
 // ── Validation ─────────────────────────────────────────────
 const registerSchema = z
@@ -47,6 +48,8 @@ export function RegisterForm() {
             const [showPassword, setShowPassword] = useState(false);
             const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+            const { mutateAsync: registerForm } = useRegister();
+
             const {
                         register,
                         handleSubmit,
@@ -57,8 +60,10 @@ export function RegisterForm() {
 
             const onSubmit = async (values: RegisterSchema) => {
                         setErrorMessage(null);
-                        console.log(values);
-                        // ← useRegister hook goes here in Chunk 5
+                        const data = await registerForm(values)
+            
+                        console.log("This is register data here", data)
+
             };
 
             return (
