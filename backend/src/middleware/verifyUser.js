@@ -8,7 +8,6 @@ const verifyUser = async (req, res, next) => {
     if (req.headers.authorization?.startsWith("Bearer ")) {
       token = req.headers.authorization.split(" ")[1];
     }
-
     // 2️⃣ From cookies
     else if (req.cookies?.token) {
       token = req.cookies.token;

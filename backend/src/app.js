@@ -7,9 +7,16 @@ import { globalLimiter } from "./middleware/ratelimiter.js";
 import helmet from "helmet"
 import mongoSanitize from "express-mongo-sanitize";
 
-
-
 const app = express();
+app.use((req, res, next) => {
+    Object.defineProperty(req, 'query', {
+        value: { ...req.query },
+        writable: true,
+        configurable: true,
+        enumerable: true,
+    });
+    next();
+});
 
 app.use(cors({
     origin: ["http://localhost:3000"],
